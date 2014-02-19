@@ -1,0 +1,14 @@
+'''
+Created on Feb 19, 2014
+
+@author: gregbocko
+'''
+import Board
+
+if __name__ == '__main__':
+    pass
+
+def main():
+    print 'hey whattup world'
+    myBoard = Board()
+    

@@ -1,0 +1,24 @@
+-- VERSION_4
+-- START DISKCACHE
+/Users/gregbocko/Desktop/School/CSC242/OthelloProject/.metadata/.plugins/org.eclipse.core.resources/.projects/OthelloProject/com.python.pydev.analysis/v2_indexcache
+OthelloMain|1392827937000|/Users/gregbocko/Desktop/School/CSC242/OthelloProject/OthelloProject/src/OthelloMain.py
+Board|1392826261000|/Users/gregbocko/Desktop/School/CSC242/OthelloProject/OthelloProject/src/Board.py
+-- END DISKCACHE
+-- START DICTIONARY
+2
+2=OthelloMain
+1=Board
+-- END DICTIONARY
+-- START TREE 1
+4
+My|0|
+boa|1|Board!9@
+mai|1|main!18@
+myc|0|
+-- END TREE
+-- START TREE 2
+3
+__i|1|__init__!1&10@
+get|1|getBoardState!1&10@
+pri|1|printBoard!1&10@
+-- END TREE

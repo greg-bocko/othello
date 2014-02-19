@@ -1,0 +1,19 @@
+'''
+Created on Feb 19, 2014
+
+@author: gregbocko
+'''
+
+class Board(object):
+    '''
+    classdocs
+    '''
+
+
+    def __init__(self):
+        board = []
+        for i in range(0, 7):
+            board.append([])
+            for j in range(0, 7):
+                board[i].append(.)
+        
