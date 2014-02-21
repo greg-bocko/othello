@@ -1,9 +1,9 @@
 -- VERSION_4
 -- START DISKCACHE
 /Users/gregbocko/Desktop/School/CSC242/OthelloProject/.metadata/.plugins/org.eclipse.core.resources/.projects/OthelloProject/com.python.pydev.analysis/v2_indexcache
-OthelloPlayer|1392828717000|/Users/gregbocko/Desktop/School/CSC242/OthelloProject/OthelloProject/src/OthelloPlayer.py
-OthelloMain|1392998355000|/Users/gregbocko/Desktop/School/CSC242/OthelloProject/OthelloProject/src/OthelloMain.py
-Board|1392998621000|/Users/gregbocko/Desktop/School/CSC242/OthelloProject/OthelloProject/src/Board.py
+OthelloPlayer|1393004089000|/Users/gregbocko/Desktop/School/CSC242/OthelloProject/OthelloProject/src/OthelloPlayer.py
+OthelloMain|1392998779000|/Users/gregbocko/Desktop/School/CSC242/OthelloProject/OthelloProject/src/OthelloMain.py
+Board|1393004565000|/Users/gregbocko/Desktop/School/CSC242/OthelloProject/OthelloProject/src/Board.py
 -- END DISKCACHE
 -- START DICTIONARY
 4
@@ -13,26 +13,38 @@ Board|1392998621000|/Users/gregbocko/Desktop/School/CSC242/OthelloProject/Othell
 4=Board.__init__
 -- END DICTIONARY
 -- START TREE 1
-5
+6
 My|0|
 boa|1|Board!9@
+dir|0|
 mai|1|main!18@
 myc|0|
 oth|1|OthelloPlayer!25@
 -- END TREE
 -- START TREE 2
-13
+24
+!<m|0|
+UP|0|
 __i|2|__init__!1&10@__init__!3&26@
 bla|0|
+def|0|
+dir|1|DIRECTIONS!1&11@
+dow|0|
 emp|0|
-fin|0|
+fin|1|find_bracket!1&10@
 gam|1|GameBoard!4&11@
 get|1|get_touching!1&10@
 heu|1|heuristicFunction!3&26@
 is_|1|is_valid!1&10@
+ist|0|
+ith|0|
+lef|0|
+mak|0|
 opp|1|opponent!1&10@
-pie|1|PIECES!1&11@
-pla|1|PLAYERS!1&11@
+pie|0|
+pla|0|
 pri|1|print_board!1&10@
+rig|0|
+up_|0|
 whi|0|
 -- END TREE
