@@ -81,7 +81,7 @@ class Board(object):
             #if self.is_valid(goingto_row, goingto_column) and self.GameBoard[goingto_row][goingto_column] == self.opponent(player):
             bracket = self.GameBoard[goingto_row][goingto_column]
         
-        return None if bracket == player or not self.is_valid(goingto_row, goingto_column)  else bracket
+        return None if bracket != player or not self.is_valid(goingto_row, goingto_column)  else bracket
         
         
         
@@ -93,13 +93,13 @@ class Board(object):
         self.GameBoard[row][column] = player 
         "Legality is checked elsewhere"
         for d in self.DIRECTIONS:
-            self.make_flips(self, row, column, player, d)
+            self.make_flips(row, column, player, d)
         return self
     
     def make_flips(self, row, column, player, direction):
         "Actually does the work of flipping over the pieces along the bracket"
         
-        bracket = self.find_bracket(self, player, row, column, direction)
+        bracket = self.find_bracket(player, row, column, direction)
         if not bracket:
             return
         goingto_row = row + direction[0]
@@ -125,9 +125,9 @@ class Board(object):
         " a list of legal moves"
         
         legal_move_table = [[self.is_legal(player, i, j) for j in range(8)] for i in range(8)] 
-        legal_moves = {}
+        legal_moves = []
         for i in range(8):
             for j in range(8):
                 if legal_move_table[i][j]:
-                    legal_moves.append({i, j})                  
+                    legal_moves.append([i, j])                  
         return legal_moves
