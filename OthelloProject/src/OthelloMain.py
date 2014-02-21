@@ -11,8 +11,9 @@ if __name__ == '__main__':
 def main():
     
     board = Board()
-    board.print_board()
-    print board.get_touching(3,3)
+    print board.is_legal('B', 3, 4)
+    #board.print_board()
+    #print board.get_touching(3,3)
     #print board.opponent('B')
     #print board.legal_moves('B')
     

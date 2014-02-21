@@ -1,3 +1,4 @@
+import time
 '''
 Created on Feb 19, 2014
 
@@ -10,16 +11,16 @@ class Board(object):
     '''
     "This trick is taken from Dave Connelly"
     UP, DOWN, LEFT, RIGHT = [-1, 0],[1, 0],[0, -1],[0, 1]
-    UP_RIGHT, DOWN_RIGHT, DOWN_LEFT, UP_LEFT = [-1, -1],[1, -1], [1,+1], [-1, 1]
+    UP_RIGHT, DOWN_RIGHT, DOWN_LEFT, UP_LEFT = [-1, -1],[1, -1], [1,1], [-1, 1]
     DIRECTIONS = (UP, UP_RIGHT, RIGHT, DOWN_RIGHT, DOWN, DOWN_LEFT, LEFT, UP_LEFT)
 
     def __init__(self):
         self.GameBoard = [['.' for j in xrange(8)] for i in xrange(8)] 
         
-        self.GameBoard[3][3] = 'W'
-        self.GameBoard[4][4] = 'W'
-        self.GameBoard[4][3] = 'B'
-        self.GameBoard[3][4] = 'B'
+        self.GameBoard[3][3] = 'B'
+        self.GameBoard[4][4] = 'B'
+        self.GameBoard[4][3] = 'W'
+        self.GameBoard[3][4] = 'W'
         
     def print_board(self):
         for i in range(len(self.GameBoard)):
@@ -29,7 +30,7 @@ class Board(object):
             
     def is_valid(self, row, column):
         
-        return row < 7 and column < 8 or column >= 0 or row >= 0 #Tests to see if move is within bounds of board
+        return row < 8 and column < 8 and column >= 0 and row >= 0 #Tests to see if move is within bounds of board
         
     def get_touching(self, row, column):
         """ BUILDS A 3X3 ARRAY THAT DESCRIBES THE BOARD AROUND the ROWth COLUMNth piece
@@ -59,24 +60,29 @@ class Board(object):
         return opp
     
     def find_bracket(self, player, row, column, direction):
-        
+
         "This method takes a square that the player wants to move to, and looks backwards to"
         "to see if there is a 'bracket' (a path of the other player's pieces bookended by"
         " one of the players own pieces) that can be formed, given a certain direction."
-        
-        goingto_row = row + direction[0]
-        goingto_column = column + direction[1]
-        if not self.is_valid(goingto_row, goingto_column):
-            return None
+        if self.is_valid(row+1, column+1):
+           goingto_row = row + direction[0]
+           goingto_column = column + direction[1]
+        else:
+            break
         if self.GameBoard[goingto_row][goingto_column] == player:
-            return None
+           return None
         bracket = self.GameBoard[goingto_row][goingto_column]
+        
         while bracket == self.opponent(player):
             goingto_row = row + direction[0]
-            goingto_column = row + direction[1]
-            if(self.is_valid(goingto_row, goingto_column)):
-                bracket = self.GameBoard[goingto_row][goingto_column]
+            goingto_column = column + direction[1]
+            #if self.is_valid(goingto_row, goingto_column) and self.GameBoard[goingto_row][goingto_column] == self.opponent(player):
+            bracket = self.GameBoard[goingto_row][goingto_column]
+                
         return None if not self.is_valid(goingto_row, goingto_column) else bracket
+        
+        
+        
         
     def make_move(self, player, row, column):
         "This method takes the row and column the player wants to make a move to, and checks in every direction"
