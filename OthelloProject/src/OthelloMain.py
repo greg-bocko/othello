@@ -11,7 +11,10 @@ if __name__ == '__main__':
 def main():
     
     board = Board()
-    print board.is_legal('B', 3, 4)
+    for i in range(2, 6):
+        for j in range(2, 6):
+            print board.is_legal('B', i,j),
+            print i, j
     #board.print_board()
     #print board.get_touching(3,3)
     #print board.opponent('B')

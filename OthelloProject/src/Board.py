@@ -64,22 +64,24 @@ class Board(object):
         "This method takes a square that the player wants to move to, and looks backwards to"
         "to see if there is a 'bracket' (a path of the other player's pieces bookended by"
         " one of the players own pieces) that can be formed, given a certain direction."
-        if self.is_valid(row+1, column+1):
+        
+        if self.is_valid(row+direction[0], column+direction[1]):
            goingto_row = row + direction[0]
            goingto_column = column + direction[1]
         else:
-            break
-        if self.GameBoard[goingto_row][goingto_column] == player:
+            return None
+        if self.GameBoard[goingto_row][goingto_column] != self.opponent(player):
            return None
         bracket = self.GameBoard[goingto_row][goingto_column]
         
         while bracket == self.opponent(player):
-            goingto_row = row + direction[0]
-            goingto_column = column + direction[1]
+            goingto_row = goingto_row + direction[0]
+            goingto_column = goingto_column + direction[1]
+            #print 'Going to row %d column %d', (goingto_row, goingto_column)
             #if self.is_valid(goingto_row, goingto_column) and self.GameBoard[goingto_row][goingto_column] == self.opponent(player):
             bracket = self.GameBoard[goingto_row][goingto_column]
-                
-        return None if not self.is_valid(goingto_row, goingto_column) else bracket
+        
+        return None if bracket == player or not self.is_valid(goingto_row, goingto_column)  else bracket
         
         
         
@@ -110,6 +112,7 @@ class Board(object):
     
     def is_legal(self, player, row, column):
         hasbracket = False
+        
         for direction in self.DIRECTIONS:
             if self.find_bracket(player, row, column, direction) != None:
                 hasbracket = True
