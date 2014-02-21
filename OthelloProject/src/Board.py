@@ -99,4 +99,8 @@ class Board(object):
             goingto_column = column + direction[1]
         return self
             
+    def legal_moves(self, player):
+        "Builds table of which squares the player can legally move to"
+        
+        return [[self.isvalid(self, i, j) for j in xrange(8)] for i in xrange(8)] 
         
