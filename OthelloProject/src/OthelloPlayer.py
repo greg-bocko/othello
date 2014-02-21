@@ -10,12 +10,8 @@ class OthelloPlayer(object):
     '''
 
 
-    def __init__(self, depthLimit, timeLimit1 timeLimit2):
+    def __init__(self):
         
         
-        
-        '''
-        Constructor
-        '''
         
     def heuristicFunction(self, Board):

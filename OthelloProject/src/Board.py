@@ -8,10 +8,13 @@ class Board(object):
     '''
     classdocs
     '''
-
+    "This trick is taken from Dave Connelly"
+    UP, DOWN, LEFT, RIGHT = [-1, 0],[1, 0],[0, -1],[0, 1]
+    UP_RIGHT, DOWN_RIGHT, DOWN_LEFT, UP_LEFT = [-1, -1],[1, -1], [1,+1], [-1, 1]
+    DIRECTIONS = (UP, UP_RIGHT, RIGHT, DOWN_RIGHT, DOWN, DOWN_LEFT, LEFT, UP_LEFT)
 
     def __init__(self):
-        self.GameBoard = [[repr(i) + '+' + repr(j) for j in xrange(8)] for i in xrange(8)] 
+        self.GameBoard = [['.' for j in xrange(8)] for i in xrange(8)] 
         
         self.GameBoard[3][3] = 'W'
         self.GameBoard[4][4] = 'W'
@@ -24,9 +27,9 @@ class Board(object):
                 print self.GameBoard[i][j],
             print
             
-    def is_valid(self, i, j):
+    def is_valid(self, row, column):
         
-        return i > 8 and j > 8 #Tests to see if move is within bounds of board
+        return row < 7 and column < 8 or column >= 0 or row >= 0 #Tests to see if move is within bounds of board
         
     def get_touching(self, row, column):
         """ BUILDS A 3X3 ARRAY THAT DESCRIBES THE BOARD AROUND the ROWth COLUMNth piece
@@ -47,15 +50,75 @@ class Board(object):
 
         
     def opponent(self, player):
+        "Self explanatory"
         
         if player == 'B': 
             opp = 'W'
         else: 
             opp = 'B'
         return opp
-
+    
+    def find_bracket(self, player, row, column, direction):
         
+        "This method takes a square that the player wants to move to, and looks backwards to"
+        "to see if there is a 'bracket' (a path of the other player's pieces bookended by"
+        " one of the players own pieces) that can be formed, given a certain direction."
         
+        goingto_row = row + direction[0]
+        goingto_column = column + direction[1]
+        if not self.is_valid(goingto_row, goingto_column):
+            return None
+        if self.GameBoard[goingto_row][goingto_column] == player:
+            return None
+        bracket = self.GameBoard[goingto_row][goingto_column]
+        while bracket == self.opponent(player):
+            goingto_row = row + direction[0]
+            goingto_column = row + direction[1]
+            if(self.is_valid(goingto_row, goingto_column)):
+                bracket = self.GameBoard[goingto_row][goingto_column]
+        return None if not self.is_valid(goingto_row, goingto_column) else bracket
         
-    #def placeNewPiece(self):
+    def make_move(self, player, row, column):
+        "This method takes the row and column the player wants to make a move to, and checks in every direction"
+        "from it if it can flip anything from there"
         
+        self.GameBoard[row][column] = player 
+        "Legality is checked elsewhere"
+        for d in self.DIRECTIONS:
+            self.make_flips(self, row, column, player, d)
+        return self
+    
+    def make_flips(self, row, column, player, direction):
+        "Actually does the work of flipping over the pieces along the bracket"
+        
+        bracket = self.find_bracket(self, player, row, column, direction)
+        if not bracket:
+            return
+        goingto_row = row + direction[0]
+        goingto_column = column + direction[1]
+        while self.GameBoard[goingto_row][goingto_column] != bracket:
+            self.GameBoard[goingto_row][goingto_column] = player
+            goingto_row = row + direction[0]
+            goingto_column = column + direction[1]
+        return self
+    
+    def is_legal(self, player, row, column):
+        hasbracket = False
+        for direction in self.DIRECTIONS:
+            if self.find_bracket(player, row, column, direction) != None:
+                hasbracket = True
+            
+        return self.GameBoard[row][column] == '.' and hasbracket
+        
+            
+    def legal_moves(self, player):
+        "Builds table of which squares the player can legally move to, then uses that to write"
+        " a list of legal moves"
+        
+        legal_move_table = [[self.is_legal(player, i, j) for j in range(8)] for i in range(8)] 
+        legal_moves = {}
+        for i in range(8):
+            for j in range(8):
+                if legal_move_table[i][j]:
+                    legal_moves.append({i, j})                  
+        return legal_moves
