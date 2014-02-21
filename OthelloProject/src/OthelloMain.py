@@ -12,6 +12,6 @@ def main():
     
     board = Board()
     board.print_board()
-    print board.get_touching(3, 3)
+    print board.get_touching(7, 7)
     
 main()

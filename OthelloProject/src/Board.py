@@ -34,11 +34,21 @@ class Board(object):
         return i > 8 and j > 8 #Tests to see if move is within bounds of board
         
     def get_touching(self, row, column):
-        #BUILDS A 3X3 ARRAY THAT DESCRIBES THE BOARD AROUND the ROWth COLUMNth piece
+        """ BUILDS A 3X3 ARRAY THAT DESCRIBES THE BOARD AROUND the ROWth COLUMNth piece
+        Arithmetic at the beginning checks that 3x3 matrix is appropriate, and if not, creates
+        appropriate bounds for the bordering pieces """
+        lower_i= row -1
+        lower_j =column -1
+        upper_i = row + 2
+        upper_j = column + 2
         
-        return [[self.GameBoard[i][j] for j in range(column-1,column+2)] for i in xrange(row-1,row+2)]
+        if row == 7: upper_i =8
+        if column == 7: upper_j = 8
+        if row == 0: lower_i = 0
+        if column == 0: lower_j =0
 
-        #NB Range(x,y) is non-inclusive in Python, so this goes from column-1, row-1
+        return [[self.GameBoard[i][j] for j in range(lower_j,upper_j)] for i in xrange(lower_j,upper_j)]
+
         
    # def opponent(self, player):
         
