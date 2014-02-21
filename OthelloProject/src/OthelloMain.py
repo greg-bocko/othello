@@ -10,26 +10,8 @@ if __name__ == '__main__':
 
 def main():
     
-    """
-    print 'hey whattup world'
-    myBoard = Board(Board)
-    myBoard.printBoard()
-    
-    Board = [['.' for i in xrange(8)] for j in xrange(8)] 
-        
-    Board[3][3] = 'W'
-    Board[4][4] = 'W'
-    Board[4][3] = 'B'
-    Board[3][4] = 'B'
-    
-    print Board
-    print
-        
-    for i in range(len(Board)):
-        for j in range(len(Board[i])):
-            print Board[i][j],
-        print
-        """
-    
+    board = Board()
+    board.print_board()
+    print board.get_touching(3, 3)
     
 main()

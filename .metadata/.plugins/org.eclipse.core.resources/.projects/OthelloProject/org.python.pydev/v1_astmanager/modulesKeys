@@ -1,1 +1,4 @@
 MODULES_MANAGER_V2
+Board|/Users/gregbocko/Desktop/School/CSC242/OthelloProject/OthelloProject/src/Board.py
+OthelloMain|/Users/gregbocko/Desktop/School/CSC242/OthelloProject/OthelloProject/src/OthelloMain.py
+OthelloPlayer|/Users/gregbocko/Desktop/School/CSC242/OthelloProject/OthelloProject/src/OthelloPlayer.py

@@ -569,3 +569,6 @@ Binding(COMMAND+SHIFT+T,
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	com.python.pydev.contexts.window,,,system)
+
+!ENTRY org.python.pydev.shared_core 4 4 2014-02-19 16:41:23.001
+!MESSAGE Info: Rebuilding internal caches: /Users/gregbocko/Desktop/School/CSC242/OthelloProject/.metadata/.plugins/org.eclipse.core.resources/.projects/CodeGolf/com.python.pydev.analysis/AdditionalProjectInterpreterInfo.pydevinfo (Expected error to be provided and got no error!)
