@@ -5,11 +5,6 @@ Created on Feb 19, 2014
 '''
 
 class Board(object):
-    
-    WHITE, BLACK, EMPTY= 'W', 'B', '.'
-    PIECES =(EMPTY, BLACK, WHITE)
-    PLAYERS = {BLACK: 'B', WHITE: 'W'}
-    
     '''
     classdocs
     '''
@@ -37,6 +32,7 @@ class Board(object):
         """ BUILDS A 3X3 ARRAY THAT DESCRIBES THE BOARD AROUND the ROWth COLUMNth piece
         Arithmetic at the beginning checks that 3x3 matrix is appropriate, and if not, creates
         appropriate bounds for the bordering pieces """
+        
         lower_i= row -1
         lower_j =column -1
         upper_i = row + 2
@@ -47,12 +43,16 @@ class Board(object):
         if row == 0: lower_i = 0
         if column == 0: lower_j =0
 
-        return [[self.GameBoard[i][j] for j in range(lower_j,upper_j)] for i in xrange(lower_j,upper_j)]
+        return [[self.GameBoard[i][j] for j in range(lower_j,upper_j)] for i in xrange(lower_i,upper_i)]
 
         
-   # def opponent(self, player):
+    def opponent(self, player):
         
-    #    return WHITE if player is BLACK else BLACK
+        if player == 'B': 
+            opp = 'W'
+        else: 
+            opp = 'B'
+        return opp
 
         
         

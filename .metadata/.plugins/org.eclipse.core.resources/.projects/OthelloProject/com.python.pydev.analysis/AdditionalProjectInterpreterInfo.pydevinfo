@@ -2,34 +2,37 @@
 -- START DISKCACHE
 /Users/gregbocko/Desktop/School/CSC242/OthelloProject/.metadata/.plugins/org.eclipse.core.resources/.projects/OthelloProject/com.python.pydev.analysis/v2_indexcache
 OthelloPlayer|1392828717000|/Users/gregbocko/Desktop/School/CSC242/OthelloProject/OthelloProject/src/OthelloPlayer.py
-OthelloMain|1392995856000|/Users/gregbocko/Desktop/School/CSC242/OthelloProject/OthelloProject/src/OthelloMain.py
+OthelloMain|1392998355000|/Users/gregbocko/Desktop/School/CSC242/OthelloProject/OthelloProject/src/OthelloMain.py
+Board|1392998621000|/Users/gregbocko/Desktop/School/CSC242/OthelloProject/OthelloProject/src/Board.py
 -- END DISKCACHE
 -- START DICTIONARY
-2
-2=OthelloPlayer
-1=OthelloMain
+4
+3=OthelloPlayer
+2=OthelloMain
+1=Board
+4=Board.__init__
 -- END DICTIONARY
 -- START TREE 1
 5
 My|0|
-boa|0|
-mai|1|main!10@
+boa|1|Board!9@
+mai|1|main!18@
 myc|0|
-oth|1|OthelloPlayer!17@
+oth|1|OthelloPlayer!25@
 -- END TREE
 -- START TREE 2
 13
-__i|1|__init__!2&18@
+__i|2|__init__!1&10@__init__!3&26@
 bla|0|
 emp|0|
 fin|0|
-gam|0|
-get|0|
-heu|1|heuristicFunction!2&18@
-is_|0|
-opp|0|
-pie|0|
-pla|0|
-pri|0|
+gam|1|GameBoard!4&11@
+get|1|get_touching!1&10@
+heu|1|heuristicFunction!3&26@
+is_|1|is_valid!1&10@
+opp|1|opponent!1&10@
+pie|1|PIECES!1&11@
+pla|1|PLAYERS!1&11@
+pri|1|print_board!1&10@
 whi|0|
 -- END TREE
