@@ -92,6 +92,16 @@ class Board(object):
         
         if self.is_legal(player, row, column):
             self.GameBoard[row][column] = player 
+        #checks that the move was legal and continues taking input if the move 
+        #was not legal until legal move occurs
+        else:
+            legal = False
+            while not legal:
+                print "That move was illegal, please print a legal move"
+                move = input()
+                legal = self.is_legal(player, move[0],move[1])
+            self.GameBoard[row][column] = player 
+
         "Legality is checked elsewhere"
         for d in self.DIRECTIONS:
             self.make_flips(row, column, player, d)
@@ -118,6 +128,9 @@ class Board(object):
             if self.find_bracket(player, row, column, direction) != None:
                 hasbracket = True
             
+        #if not hasbracket:
+        #    print 'this move is illegal'
+
         return self.GameBoard[row][column] == '.' and hasbracket
         
             
