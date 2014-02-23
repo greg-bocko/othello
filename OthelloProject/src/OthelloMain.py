@@ -11,18 +11,16 @@ if __name__ == '__main__':
 def main():
     
     board = Board()
-    #for i in range(2, 6):
-     #   for j in range(2, 6):
-      #      print board.is_legal('W', i,j),
-       #     print i, j
-    #board.print_board()
-    #print board.get_touching(3,3)
-    #print board.opponent('B')
-    board.make_move('B', 2, 4)
-    board.print_board()
-    board.make_move('W', 2, 3)
-    board.print_board()
-    board.make_move('B', 4, 2)
-    board.print_board()
+    player = 'B'
+    print board.gameover(player)
+    print board.legal_moves('B')
+    print board.legal_moves('W')
     
+    while not board.gameover(player):
+        move = input()
+        board.make_move(player,move[0],move[1])
+        player = board.opponent(player)
+        board.print_board()
+        print board.legal_moves(player)
+         
 main()

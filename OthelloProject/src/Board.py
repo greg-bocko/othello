@@ -30,7 +30,7 @@ class Board(object):
             
     def is_valid(self, row, column):
         
-        return row < 8 and column < 8 and column >= 0 and row >= 0 #Tests to see if move is within bounds of board
+        return row < 8 and column < 8 and column >= 0 and row >= 0#Tests to see if move is within bounds of board
         
     def get_touching(self, row, column):
         """ BUILDS A 3X3 ARRAY THAT DESCRIBES THE BOARD AROUND the ROWth COLUMNth piece
@@ -66,12 +66,12 @@ class Board(object):
         " one of the players own pieces) that can be formed, given a certain direction."
         
         if self.is_valid(row+direction[0], column+direction[1]):
-           goingto_row = row + direction[0]
-           goingto_column = column + direction[1]
+            goingto_row = row + direction[0]
+            goingto_column = column + direction[1]
         else:
             return None
         if self.GameBoard[goingto_row][goingto_column] != self.opponent(player):
-           return None
+            return None
         bracket = self.GameBoard[goingto_row][goingto_column]
         
         while bracket == self.opponent(player):
@@ -90,7 +90,8 @@ class Board(object):
         "This method takes the row and column the player wants to make a move to, and checks in every direction"
         "from it if it can flip anything from there"
         
-        self.GameBoard[row][column] = player 
+        if self.is_legal(player, row, column):
+            self.GameBoard[row][column] = player 
         "Legality is checked elsewhere"
         for d in self.DIRECTIONS:
             self.make_flips(row, column, player, d)
@@ -101,13 +102,13 @@ class Board(object):
         
         bracket = self.find_bracket(player, row, column, direction)
         if not bracket:
-            return
+            return None
         goingto_row = row + direction[0]
         goingto_column = column + direction[1]
         while self.GameBoard[goingto_row][goingto_column] != bracket:
             self.GameBoard[goingto_row][goingto_column] = player
-            goingto_row = row + direction[0]
-            goingto_column = column + direction[1]
+            goingto_row = goingto_row + direction[0]
+            goingto_column = goingto_column + direction[1]
         return self
     
     def is_legal(self, player, row, column):
@@ -131,3 +132,26 @@ class Board(object):
                 if legal_move_table[i][j]:
                     legal_moves.append([i, j])                  
         return legal_moves
+    
+    def any_legal_moves(self, player):
+        if self.legal_moves(player) is not None:
+            return True
+        else:
+            return False
+    
+    def read_move(self, player, row, column):
+        
+        if self.is_legal(player, row, column):
+            self.make_move(player, row, column)
+        if not self.is_legal(player, row, column):
+            print "Sorry, can't do that!"
+            
+    def gameover(self,player):
+        if self.any_legal_moves(player):
+            return False
+        elif self.any_legal_moves(self.opponent(player)):
+            return False
+        else:
+            return True
+
+        

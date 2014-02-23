@@ -1,10 +1,10 @@
 -- VERSION_4
 -- START DISKCACHE
 /Users/gregbocko/Desktop/School/CSC242/OthelloProject/.metadata/.plugins/org.eclipse.core.resources/.projects/OthelloProject/com.python.pydev.analysis/v2_indexcache
-OthelloPlayer|1393004682000|/Users/gregbocko/Desktop/School/CSC242/OthelloProject/OthelloProject/src/OthelloPlayer.py
-Tree|1393021990000|/Users/gregbocko/Desktop/School/CSC242/OthelloProject/OthelloProject/src/Tree.py
-OthelloMain|1393018632000|/Users/gregbocko/Desktop/School/CSC242/OthelloProject/OthelloProject/src/OthelloMain.py
-Board|1393018301000|/Users/gregbocko/Desktop/School/CSC242/OthelloProject/OthelloProject/src/Board.py
+OthelloPlayer|1393110822000|/Users/gregbocko/Desktop/School/CSC242/OthelloProject/OthelloProject/src/OthelloPlayer.py
+Tree|1393022187000|/Users/gregbocko/Desktop/School/CSC242/OthelloProject/OthelloProject/src/Tree.py
+OthelloMain|1393111639000|/Users/gregbocko/Desktop/School/CSC242/OthelloProject/OthelloProject/src/OthelloMain.py
+Board|1393111812000|/Users/gregbocko/Desktop/School/CSC242/OthelloProject/OthelloProject/src/Board.py
 -- END DISKCACHE
 -- START DICTIONARY
 6
@@ -25,19 +25,20 @@ myc|1|MyClass!25@
 oth|1|OthelloPlayer!33@
 -- END TREE
 -- START TREE 2
-27
+29
 !<m|0|
 UP|0|
 __i|3|__init__!1&10@__init__!5&26@__init__!4&34@
-any|0|
+any|1|any_legal_moves!1&10@
 bla|0|
 def|0|
 dir|1|DIRECTIONS!1&11@
 dow|0|
 emp|0|
 fin|1|find_bracket!1&10@
-gam|1|GameBoard!6&11@
+gam|2|GameBoard!6&11@gameover!1&10@
 get|1|get_touching!1&10@
+has|0|
 heu|1|heuristicFunction!4&34@
 is_|2|is_legal!1&10@is_valid!1&10@
 ist|0|
@@ -50,6 +51,7 @@ opp|1|opponent!1&10@
 pie|0|
 pla|0|
 pri|1|print_board!1&10@
+rea|1|read_move!1&10@
 rig|0|
 up_|0|
 whi|0|
