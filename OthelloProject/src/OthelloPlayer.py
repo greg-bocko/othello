@@ -32,7 +32,7 @@ class OthelloPlayer(object):
     	a = random.randint(0,100)
     	headNode = TreeNode(Board, 'B', a)
     	print 'got here at least'
-    	a = self.Alpha_Beta(headNode, 0, [-1000], [1000], 'B')
+    	a = self.Alpha_Beta(headNode, 0, -1000, 1000, 'B')
     	print 'AB'
     	print a
 
@@ -49,17 +49,17 @@ class OthelloPlayer(object):
     	return False
 
     def Alpha_Beta(self, node, depth, alpha, beta, player):
-    	print player
-    	print node.get_numb()
-    	print 'this is the board'
+    	#print player
+    	##print node.get_numb()
+    	#print 'this is the board'
     	moves = node.access_Board().legal_moves(player)
-    	print moves
+    	#print moves
     	self.create_Children(node, moves, player)
 
     	if self.Cutoff_test(node, depth):
     		#node.set_moves
-    		print 'lol'
-    		print node.get_moves(player)
+    		##print 'lol'
+    		#print node.get_moves(player)
     		return node.get_moves(player)
     	best = None
     	#handles early pruning
@@ -76,18 +76,23 @@ class OthelloPlayer(object):
     			#moves = child.legal_moves()
     			#child.create_Children(child, moves, player)
     			value = self.Alpha_Beta(children[i], depth+1, alpha, beta, self.opponent(player))
-    			print 'this is alpha1'
-    			print value
+    			#print 'this is alpha1 %i', value
+    			#print value
     			#if not (value == None):
-	    		if(value[0] > alpha):
+	    		if(value[0] >= alpha):
+	    			#print 'maximizing'
 	    			alpha = value[0]
 	    			best = i
-    			if(beta[0] <= alpha[0]):
+	    			#print 'the value iof best is %i', i
+    			'''
+    			if(beta <= alpha):
+    				print 'this should never happen1'
     				return [None]
-    		print alpha
-    		print best
-    		print children[best].get_move()
-    		print 'returning'
+    			'''
+    		#print alpha
+    		##print best
+    		#print children[best].get_move()
+    		#print 'returning'
     		return alpha, best, children[best].get_move()
     	else:
     		for i in range(len(children)):
@@ -96,15 +101,19 @@ class OthelloPlayer(object):
     			#moves = child.legal_moves()
     			#child.create_Children(child, moves, player)
     			value = self.Alpha_Beta(children[i], depth+1, alpha, beta, self.opponent(player))
-    			print 'else'
-    			print value
+    			#print 'else'
+    			#print value
+    			#print beta
     			#if not (value[0] == None):
-	    		if(value[0] < beta):
+	    		if(value[0] <= beta):
 	    			beta = value[0]
 	    			best = i
-    			if(beta <= alpha):
+	    		'''
+    			if (beta <= alpha):
+    				print 'this should never happen2'
     				return [None]
-    		return beta, best, children[best].get_move
+    			'''
+    		return beta, best, children[best].get_move()
 
     '''
     These arent being used anymore but I dont want to get rid of them yet
