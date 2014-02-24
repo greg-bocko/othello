@@ -53,9 +53,9 @@ class TreeNode(object):
     def get_moves(self, player_color):
     	moves = self.Board.legal_moves(player_color)
     	#self.number_of_Moves = len(moves)
-    	length = [0]
-    	length[0] = len(moves)
-    	return length
+    	#length = [0]
+    	#length[0] = len(moves)
+    	return len(moves)
 
     #isnt really used anymore
     def set_moves(self):

@@ -49,51 +49,56 @@ class OthelloPlayer(object):
     	return False
 
     def Alpha_Beta(self, node, depth, alpha, beta, player):
-    	#print player
-    	##print node.get_numb()
-    	#print 'this is the board'
     	moves = node.access_Board().legal_moves(player)
-    	#print moves
     	self.create_Children(node, moves, player)
 
     	if self.Cutoff_test(node, depth):
-    		#node.set_moves
-    		##print 'lol'
-    		#print node.get_moves(player)
-    		return node.get_moves(player)
-    	best = None
+    		print node.get_moves(player)
+    		print player
+    		a = [0,[0,0,0,0]]
+    		a[0] = node.get_moves(player)
+      		return a #node.get_moves(player)
+    	best = [None]
     	#handles early pruning
     	#will have to be changed
 
     	counter = 0
     	children = node.return_All_Children()
-    	best = 0
+    	best = [0, 0, 0 ,0]
     	if(player == 'B'):
 
     		for i in range(len(children)):
     			
-    			children[i].access_Board().print_board()
+    			#children[i].access_Board().print_board()
     			#moves = child.legal_moves()
     			#child.create_Children(child, moves, player)
     			value = self.Alpha_Beta(children[i], depth+1, alpha, beta, self.opponent(player))
+    			print 'coming out and itno depth %i', depth
+    			print alpha, value[0], beta
+    			#print value
     			#print 'this is alpha1 %i', value
     			#print value
     			#if not (value == None):
-	    		if(value[0] >= alpha):
+	    		if(value[0] > alpha):
 	    			#print 'maximizing'
+	    			print 'new alpha VALUE', alpha, value[0]
 	    			alpha = value[0]
-	    			best = i
-	    			#print 'the value iof best is %i', i
-    			'''
-    			if(beta <= alpha):
-    				print 'this should never happen1'
-    				return [None]
-    			'''
-    		#print alpha
-    		##print best
-    		#print children[best].get_move()
-    		#print 'returning'
-    		return alpha, best, children[best].get_move()
+	    			best = value[1]
+	    			best[depth] = i
+	    		elif(value[0] == alpha):
+	    			a = random.randint(0,1)
+	    			if(a == 1):
+	    				#print depth
+	    				alpha = value[0]
+	    				best = value[1]
+	    				best[depth] = i
+	    		if (beta <= alpha):
+    				print 'this should never happen2'
+    				break
+    				#return [None]
+    			
+
+    		return alpha, best, children[best[depth]].get_move()
     	else:
     		for i in range(len(children)):
 
@@ -101,19 +106,31 @@ class OthelloPlayer(object):
     			#moves = child.legal_moves()
     			#child.create_Children(child, moves, player)
     			value = self.Alpha_Beta(children[i], depth+1, alpha, beta, self.opponent(player))
-    			#print 'else'
-    			#print value
-    			#print beta
-    			#if not (value[0] == None):
-	    		if(value[0] <= beta):
+	    		print 'coming out and itno depth %i', depth
+	    		print value
+	    		if(value[0] < beta):
+	    			print 'new beta VALUE', beta, value[0]
 	    			beta = value[0]
-	    			best = i
-	    		'''
+	    			print value
+	    			best = value[1]
+	    			best[depth] = i
+
+	    		elif(value[0] == beta):
+	    			a = random.randint(0,1)
+	    			if(a == 1):
+	    				#print depth
+	    				beta = value[0]
+	    				best = value[1]
+	    				best[depth] = i
+	    				#if(depth == 2):
+	    				#print 
+	    		
     			if (beta <= alpha):
     				print 'this should never happen2'
-    				return [None]
-    			'''
-    		return beta, best, children[best].get_move()
+    				break
+    				#return [None]
+    			
+    		return beta, best, children[best[depth]].get_move()
 
     '''
     These arent being used anymore but I dont want to get rid of them yet
