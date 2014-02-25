@@ -17,11 +17,11 @@ def main():
     print board.gameover(player)
     print board.legal_moves('B')
     print board.legal_moves('W')
-    
+    print board.is_legal('B', 2,4)
     #print board.print_board
 
     player1 = OthelloPlayer('B')
-    player1.heuristic_Function(board)
+    print player1.heuristic_Function(board, 'B')
     #node = TreeNode(board, 1)
     #player1.Alpha_Beta(node, 0, -1000, 1000, +1)
     

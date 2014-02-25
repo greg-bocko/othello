@@ -28,12 +28,23 @@ class OthelloPlayer(object):
             opp = 'B'
         return opp
 
-    def heuristic_Function(self, Board):
-    	a = random.randint(0,100)
+    def heuristic_Function(self, Board, player):
+    	a = 1
+    	#a needs to be illiminated from TreeNode and here
+    	print 'Alpha-Beta'
+    	if(Board.is_legal(player, 0, 0)):
+    		return [0,0]
+    	if(Board.is_legal(player, 7, 0)):
+    		return [7,0]
+    	if(Board.is_legal(player, 0, 7)):
+    		return [0,7]
+    	if(Board.is_legal(player, 7, 7)):
+    		return [7,7]
     	headNode = TreeNode(Board, 'B', a)
     	a = self.Alpha_Beta(headNode, 0, -1000, 1000, 'B')
-    	print 'Alpha-Beta'
     	print a
+    	return a[2]
+
 
     #might need to change to B/W or +1/-1
     def minmax_Opposite(self, minmaxvar):
