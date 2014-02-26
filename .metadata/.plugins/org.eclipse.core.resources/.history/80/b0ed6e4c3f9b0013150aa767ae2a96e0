@@ -1,0 +1,23 @@
+'''
+Created on Feb 19, 2014
+
+@author: gregbocko
+'''
+from Board import Board
+
+if __name__ == '__main__':
+    pass
+
+def main():
+    
+    board = Board()
+    #for i in range(2, 6):
+     #   for j in range(2, 6):
+      #      print board.is_legal('W', i,j),
+       #     print i, j
+    #board.print_board()
+    #print board.get_touching(3,3)
+    #print board.opponent('B')
+    print board.legal_moves('B')
+    
+main()

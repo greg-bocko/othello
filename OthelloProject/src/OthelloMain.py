@@ -19,19 +19,21 @@ def main():
     print board.legal_moves('W')
     print board.is_legal('B', 2,4)
     #print board.print_board
-
+    
+    board.print_board()
     player1 = OthelloPlayer('B')
-    print player1.heuristic_Function(board, 'B')
+    board = player1.make_move(board)
+    board.print_board()
     #node = TreeNode(board, 1)
     #player1.Alpha_Beta(node, 0, -1000, 1000, +1)
     
-    print 'hi'
+    #print player1.Alpha_Beta(node, 4, float("-inf"), float("inf"), player1)
 
-    while not board.gameover(player):
-        move = input()
+    #while not board.gameover(player):
+     #   move = input()
         #board.make_move(player,move[0],move[1])
-        player = board.opponent(player)
-        board.print_board()
-        print board.legal_moves(player)
+      #  player = board.opponent(player)
+      #  board.print_board()
+       # print board.legal_moves(player)
 
 main()

@@ -1,0 +1,24 @@
+'''
+Created on Feb 19, 2014
+
+@author: gregbocko
+'''
+from Board import Board
+
+if __name__ == '__main__':
+    pass
+
+def main():
+    
+    board = Board()
+    player = 'B'
+    
+    while not board.gameover(player):
+        move = input()
+        board.make_move(player,move[0],move[1])
+        player = board.opponent(player)
+        
+        
+    
+    
+main()

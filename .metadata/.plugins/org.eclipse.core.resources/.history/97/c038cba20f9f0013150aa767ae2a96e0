@@ -1,0 +1,48 @@
+'''
+Created on Feb 26, 2014
+
+@author: gregbocko
+'''
+from Board import Board
+from OthelloPlayer import OthelloPlayer
+from TreeNode import TreeNode
+
+if __name__ == '__main__':
+    pass
+
+def main():
+    board = Board()
+    argument_line = raw_input()
+    playing_dude = OthelloPlayer(argument_line[5])
+    depth_limit = argument_line[7]
+    time_limit1 = argument_line[9]
+    time_limit2 = argument_line[11]
+    this_turn = 'B'
+    #if playing_dude.player_color == 'B':
+    
+    while not board.gameover(this_turn):
+        if this_turn == playing_dude.player_color:
+            board = playing_dude.make_move(board)
+            board.print_board()
+            print '%s dude just went\n' %(this_turn)
+            this_turn = trade_turn('B')
+            print '%s dude is going to go\n'%(this_turn)
+        else:
+            print board.legal_moves(this_turn)
+            move = raw_input()
+            board = board.make_move(this_turn, int(float(move[0])), int(float(move[2])))
+            print '%s dude just went\n' %(this_turn)
+            this_turn = trade_turn('W')
+            
+        
+def trade_turn(this_turn):
+    this_turn = Board().opponent(this_turn)
+
+def understand_move(move_string):
+    move = []
+    move[0] = move_string[0]
+    move[1] = move_string[2]
+    return move
+    
+        
+main()

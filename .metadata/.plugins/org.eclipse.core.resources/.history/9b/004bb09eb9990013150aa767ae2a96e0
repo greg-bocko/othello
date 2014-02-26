@@ -1,0 +1,12 @@
+def main():
+    n = int(float(sys.argv[1]))
+    k = int(float(sys.arv[3]))
+    if k == 0:
+        return 1
+    print (partial(n, n - k, n))//(partial(k, 0, k))
+
+def partial(n, l, i):
+    while i > l +1:
+        i = i -1
+        n = n * i
+    return n

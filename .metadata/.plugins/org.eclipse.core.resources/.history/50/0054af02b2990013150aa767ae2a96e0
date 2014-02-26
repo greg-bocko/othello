@@ -1,0 +1,16 @@
+def fac(n, k):
+    t = n
+    i = n
+    b = k
+    while i >= (n - k):
+        n = n -1
+        i = i -1
+        t = t * n
+        print n
+        print i
+    while k > 1:
+        k = k -1
+        b = b * k 
+    return t//b
+
+print fac(22, 9)

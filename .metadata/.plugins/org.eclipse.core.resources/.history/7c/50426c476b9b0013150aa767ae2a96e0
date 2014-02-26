@@ -1,0 +1,17 @@
+def m():
+    
+    #inp = input()
+    string = 'hello'
+    
+    
+    print replace_vowels(string)
+    
+def replace_vowels(string):
+    
+    VOWELS = [a,e,i,o,u]
+    for i in range(len(VOWELS)):
+        string.replace(VOWELS[i], '')
+    return string
+    
+    
+m()

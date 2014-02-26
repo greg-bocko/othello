@@ -17,7 +17,7 @@ class TreeNode(object):
     	global children
     	'''
     	self.minmax = minmaxvar
-    	self.Board = boardvar
+    	self.board = boardvar
     	self.children = []
     	self.move = [] # the actual move to get to this game state
     	self.numb = numb
@@ -43,15 +43,15 @@ class TreeNode(object):
 
     #return the 2d array representation of the board
     def get_Board(self):
-    	return self.Board.get_2d_array()
+    	return self.board.get_2d_array()
 
     #return the actuall board
     def access_Board(self):
-    	return self.Board
+    	return self.board
 
     #THIS NEEDS TO BE TESTED. NOT SURE IF OPPOSITE SHOULD BE USED
     def get_moves(self, player_color):
-    	moves = self.Board.legal_moves(player_color)
+    	moves = self.board.legal_moves(player_color)
     	#self.number_of_Moves = len(moves)
     	#length = [0]
     	#length[0] = len(moves)
@@ -59,7 +59,7 @@ class TreeNode(object):
 
     #isnt really used anymore
     def set_moves(self):
-    	moves = self.Board.legal_moves(player_color)
+    	moves = self.board.legal_moves(player_color)
     	self.number_of_Moves = len(moves)
 
     #the 2 numbers corresponding to the move

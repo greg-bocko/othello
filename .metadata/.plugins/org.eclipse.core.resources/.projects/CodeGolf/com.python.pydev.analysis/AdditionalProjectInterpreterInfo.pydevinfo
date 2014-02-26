@@ -1,0 +1,27 @@
+-- VERSION_4
+-- START DISKCACHE
+/Users/gregbocko/Desktop/School/CSC242/OthelloProject/.metadata/.plugins/org.eclipse.core.resources/.projects/CodeGolf/com.python.pydev.analysis/v2_indexcache
+BinomialCoeffecient|1392859183000|/Users/gregbocko/Desktop/Programming/src/BinomialCoeffecient.py
+-- END DISKCACHE
+-- START DICTIONARY
+1
+1=BinomialCoeffecient
+-- END DICTIONARY
+-- START TREE 1
+11
+!<m|0|
+fac|0|
+i|0|
+m|1|m!10@
+mai|0|
+myc|0|
+n|0|
+par|0|
+pl|1|pl!10@
+rep|0|
+vow|0|
+-- END TREE
+-- START TREE 2
+1
+__i|0|
+-- END TREE

@@ -1,0 +1,14 @@
+import sys
+def main():
+    line = input()
+    n = int(float(line[1].strip(',')))
+    k = int(float(line[2]))
+    if k == 0:
+        return 1
+    print (partial(n, n - k, n))//(partial(k, 0, k))
+def partial(n, l, i):
+    while i > l +1:
+        i = i -1
+        n = n * i
+    return n
+main()

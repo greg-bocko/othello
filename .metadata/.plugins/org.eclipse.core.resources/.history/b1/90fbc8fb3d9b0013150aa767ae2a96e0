@@ -1,0 +1,133 @@
+import time
+'''
+Created on Feb 19, 2014
+
+@author: gregbocko
+'''
+
+class Board(object):
+    '''
+    classdocs
+    '''
+    "This trick is taken from Dave Connelly"
+    UP, DOWN, LEFT, RIGHT = [-1, 0],[1, 0],[0, -1],[0, 1]
+    UP_RIGHT, DOWN_RIGHT, DOWN_LEFT, UP_LEFT = [-1, -1],[1, -1], [1,1], [-1, 1]
+    DIRECTIONS = (UP, UP_RIGHT, RIGHT, DOWN_RIGHT, DOWN, DOWN_LEFT, LEFT, UP_LEFT)
+
+    def __init__(self):
+        self.GameBoard = [['.' for j in xrange(8)] for i in xrange(8)] 
+        
+        self.GameBoard[3][3] = 'B'
+        self.GameBoard[4][4] = 'B'
+        self.GameBoard[4][3] = 'W'
+        self.GameBoard[3][4] = 'W'
+        
+    def print_board(self):
+        for i in range(len(self.GameBoard)):
+            for j in range(len(self.GameBoard[i])):
+                print self.GameBoard[i][j],
+            print
+            
+    def is_valid(self, row, column):
+        
+        return row < 8 and column < 8 and column >= 0 and row >= 0 #Tests to see if move is within bounds of board
+        
+    def get_touching(self, row, column):
+        """ BUILDS A 3X3 ARRAY THAT DESCRIBES THE BOARD AROUND the ROWth COLUMNth piece
+        Arithmetic at the beginning checks that 3x3 matrix is appropriate, and if not, creates
+        appropriate bounds for the bordering pieces """
+        
+        lower_i= row -1
+        lower_j =column -1
+        upper_i = row + 2
+        upper_j = column + 2
+        
+        if row == 7: upper_i =8
+        if column == 7: upper_j = 8
+        if row == 0: lower_i = 0
+        if column == 0: lower_j =0
+
+        return [[self.GameBoard[i][j] for j in range(lower_j,upper_j)] for i in xrange(lower_i,upper_i)]
+
+        
+    def opponent(self, player):
+        "Self explanatory"
+        
+        if player == 'B': 
+            opp = 'W'
+        else: 
+            opp = 'B'
+        return opp
+    
+    def find_bracket(self, player, row, column, direction):
+
+        "This method takes a square that the player wants to move to, and looks backwards to"
+        "to see if there is a 'bracket' (a path of the other player's pieces bookended by"
+        " one of the players own pieces) that can be formed, given a certain direction."
+        
+        if self.is_valid(row+direction[0], column+direction[1]):
+           goingto_row = row + direction[0]
+           goingto_column = column + direction[1]
+        else:
+            return None
+        if self.GameBoard[goingto_row][goingto_column] != self.opponent(player):
+           return None
+        bracket = self.GameBoard[goingto_row][goingto_column]
+        
+        while bracket == self.opponent(player):
+            goingto_row = goingto_row + direction[0]
+            goingto_column = goingto_column + direction[1]
+            print 'Going to row %d column %d', (goingto_row, goingto_column)
+            #if self.is_valid(goingto_row, goingto_column) and self.GameBoard[goingto_row][goingto_column] == self.opponent(player):
+            bracket = self.GameBoard[goingto_row][goingto_column]
+        
+        return None if bracket == player or not self.is_valid(goingto_row, goingto_column)  else bracket
+        
+        
+        
+        
+    def make_move(self, player, row, column):
+        "This method takes the row and column the player wants to make a move to, and checks in every direction"
+        "from it if it can flip anything from there"
+        
+        self.GameBoard[row][column] = player 
+        "Legality is checked elsewhere"
+        for d in self.DIRECTIONS:
+            self.make_flips(self, row, column, player, d)
+        return self
+    
+    def make_flips(self, row, column, player, direction):
+        "Actually does the work of flipping over the pieces along the bracket"
+        
+        bracket = self.find_bracket(self, player, row, column, direction)
+        if not bracket:
+            return
+        goingto_row = row + direction[0]
+        goingto_column = column + direction[1]
+        while self.GameBoard[goingto_row][goingto_column] != bracket:
+            self.GameBoard[goingto_row][goingto_column] = player
+            goingto_row = row + direction[0]
+            goingto_column = column + direction[1]
+        return self
+    
+    def is_legal(self, player, row, column):
+        hasbracket = False
+        
+        for direction in self.DIRECTIONS:
+            if self.find_bracket(player, row, column, direction) != None:
+                hasbracket = True
+            
+        return self.GameBoard[row][column] == '.' and hasbracket
+        
+            
+    def legal_moves(self, player):
+        "Builds table of which squares the player can legally move to, then uses that to write"
+        " a list of legal moves"
+        
+        legal_move_table = [[self.is_legal(player, i, j) for j in range(8)] for i in range(8)] 
+        legal_moves = {}
+        for i in range(8):
+            for j in range(8):
+                if legal_move_table[i][j]:
+                    legal_moves.append({i, j})                  
+        return legal_moves

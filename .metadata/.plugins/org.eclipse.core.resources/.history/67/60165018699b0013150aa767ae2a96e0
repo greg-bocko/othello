@@ -1,0 +1,7 @@
+def m():
+    
+    in = input()
+    VOWELS = ['a','e','i','o','u']
+    
+    for i in range(5):
+        in.

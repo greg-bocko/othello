@@ -1,0 +1,31 @@
+'''
+Created on Feb 19, 2014
+
+@author: gregbocko
+'''
+
+class Board(object):
+    '''
+    classdocs
+    '''
+
+
+    def __init__(self):
+        Board = [['.' for i in xrange(8)] for j in xrange(8)] 
+        
+        Board[4][4] = 'W'
+        Board[5][5] = 'W'
+        Board[5][4] = 'B'
+        Board[4][5] = 'B'
+        
+    def printBoard(self):
+        for i in range(len(Board)):
+            for j in range(len(Board[i])):
+                print Board[i][j]
+            print
+            
+    def getBoardState(self):
+        return Board
+    
+    #def placeNewPiece(self):
+        

@@ -1,0 +1,9 @@
+def m():
+    
+    inp = input()
+    string = inp[0].lower()
+    VOWELS = ['a','e','i','o','u']
+    
+    for i in range(len(VOWELS)):
+        inp.replace(VOWELS[i],'')
+m()

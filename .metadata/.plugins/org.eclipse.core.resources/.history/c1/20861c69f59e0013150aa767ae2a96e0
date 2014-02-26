@@ -1,0 +1,24 @@
+'''
+Created on Feb 26, 2014
+
+@author: gregbocko
+'''
+from Board import Board
+from OthelloPlayer import OthelloPlayer
+from TreeNode import TreeNode
+
+if __name__ == '__main__':
+    pass
+
+def main():
+    board = Board()
+    argument_line = raw_input()
+    playing_dude = OthelloPlayer(argument_line[5])
+    depth_limit = argument_line[7]
+    time_limit1 = argument_line[9]
+    time_limit2 = argument_line[11]
+    print playing_dude.player_color
+    print depth_limit
+    
+main()
+    

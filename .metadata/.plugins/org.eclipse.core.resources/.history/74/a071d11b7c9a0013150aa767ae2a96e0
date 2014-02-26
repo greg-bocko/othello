@@ -1,0 +1,32 @@
+'''
+Created on Feb 19, 2014
+
+@author: gregbocko
+'''
+
+class Board(object):
+    ###GameBoard = [['.' for i in xrange(8)] for j in xrange(8)] 
+    '''
+    classdocs
+    '''
+
+
+    def __init__(self):
+        self.GameBoard = [['.' for i in xrange(8)] for j in xrange(8)] 
+        
+        self.GameBoard[4][4] = 'W'
+        self.GameBoard[5][5] = 'W'
+        self.GameBoard[5][4] = 'B'
+        self.GameBoard[4][5] = 'B'
+        
+    def printBoard(self):
+        for i in range(len(self.GameBoard)):
+            for j in range(len(self.GameBoard[i])):
+                print(self.GameBoard[i][j])
+            print
+            
+    def getBoardState(self):
+        return Board
+    
+    #def placeNewPiece(self):
+        

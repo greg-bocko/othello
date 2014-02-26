@@ -8,41 +8,38 @@ from TreeNode import TreeNode
 from Board import Board
 import random
 
+
 class OthelloPlayer(object):
     '''
     classdocs
     '''
-    
-
     def __init__(self, color):
-        global player_color 
-        player_color = color
-        
+        self.player_color = color
        
-    def opponent(self, player):
+    def opponent(self):
         "Self explanatory"
         
-        if player == 'B': 
-            opp = 'W'
+        if self.player_color == 'B': 
+            opp = OthelloPlayer('W')
         else: 
-            opp = 'B'
+            opp = OthelloPlayer('B')
         return opp
 
-    def heuristic_Function(self, Board, player):
+    def heuristic_Function(self, board):
     	a = 1
     	#a needs to be illiminated from TreeNode and here
-    	print 'Alpha-Beta'
-    	if(Board.is_legal(player, 0, 0)):
+    	#print 'Alpha-Beta'
+    	if(board.is_legal(self.player_color, 0, 0)):
     		return [0,0]
-    	if(Board.is_legal(player, 7, 0)):
+    	if(board.is_legal(self.player_color, 7, 0)):
     		return [7,0]
-    	if(Board.is_legal(player, 0, 7)):
+    	if(board.is_legal(self.player_color, 0, 7)):
     		return [0,7]
-    	if(Board.is_legal(player, 7, 7)):
+    	if(board.is_legal(self.player_color, 7, 7)):
     		return [7,7]
-    	headNode = TreeNode(Board, 'B', a)
-    	a = self.Alpha_Beta(headNode, 0, -1000, 1000, 'B')
-    	print a
+    	headNode = TreeNode(board, self.player_color, a)
+    	a = self.Alpha_Beta(headNode, 0, -1000, 1000)
+    	#print a
     	return a[2]
 
 
@@ -58,22 +55,22 @@ class OthelloPlayer(object):
     		return True
     	return False
 
-    def Alpha_Beta(self, node, depth, alpha, beta, player):
-    	moves = node.access_Board().legal_moves(player)
-    	self.create_Children(node, moves, player)
+    def Alpha_Beta(self, node, depth, alpha, beta):
+    	moves = node.access_Board().legal_moves(self.player_color)
+    	self.create_Children(node, moves)
 
     	if self.Cutoff_test(node, depth):
     		a = [0,[0,0,0,0]]
-    		a[0] = node.get_moves(player)
+    		a[0] = node.get_moves(self.player_color)
       		return a 
     	best = [None]
     	#handles early pruning
     	counter = 0
     	children = node.return_All_Children()
     	best = [0, 0, 0 ,0]
-    	if(player == 'B'):
+    	if(self.player_color == 'B'):
     		for i in range(len(children)):
-    			value = self.Alpha_Beta(children[i], depth+1, alpha, beta, self.opponent(player))
+    			value = self.opponent().Alpha_Beta(children[i], depth+1, alpha, beta)
 	    		if(value[0] > alpha):
 	    			alpha = value[0]
 	    			best = value[1]
@@ -90,7 +87,7 @@ class OthelloPlayer(object):
     		return alpha, best, children[best[depth]].get_move()
     	else:
     		for i in range(len(children)):
-    			value = self.Alpha_Beta(children[i], depth+1, alpha, beta, self.opponent(player))
+    			value = self.opponent().Alpha_Beta(children[i], depth+1, alpha, beta)
 	    		if(value[0] < beta):
 	    			beta = value[0]
 	    			best = value[1]
@@ -109,16 +106,21 @@ class OthelloPlayer(object):
     		return beta, best, children[best[depth]].get_move()
     #creates the children of a node. Takes in moves and modifies a board for each child and creates
     #a new node for each child
-    def create_Children(self, parentNode, moves, player):
+    def create_Children(self, parentNode, moves):
     	parent = parentNode.access_Board()
     	for item in moves:
     		oldBoard = Board(True,parentNode.get_Board())
-    		oldBoard = oldBoard.make_move(player, item[0], item[1])
+    		oldBoard = oldBoard.make_move(self.player_color, item[0], item[1])
     		minmaxvar = self.minmax_Opposite(parentNode.get_minmax())
     		a = random.randint(0,100)
     		newNode = TreeNode(oldBoard, minmaxvar, a)
     		newNode.set_move(item)
     		parentNode.create_Child(newNode)
-
-
     		
+    def make_move(self, board):
+        move = self.heuristic_Function(board)
+        #print move
+        board = board.make_move(self.player_color, move[0], move[1])
+        print '%d %d\n' % (move[0], move[1])
+        return board
+        

@@ -20,6 +20,7 @@ class Board(object):
         if(arraypresent):
             self.GameBoard = copy.deepcopy(array)
             #this creates a copy of a gameboard array which is passed in
+            
         else:
             self.GameBoard = [['.' for j in xrange(8)] for i in xrange(8)] 
             
@@ -85,7 +86,11 @@ class Board(object):
             goingto_column = goingto_column + direction[1]
             #print 'Going to row %d column %d', (goingto_row, goingto_column)
             #if self.is_valid(goingto_row, goingto_column) and self.GameBoard[goingto_row][goingto_column] == self.opponent(player):
-            bracket = self.GameBoard[goingto_row][goingto_column]
+            if self.is_valid(goingto_row, goingto_column):
+                bracket = self.GameBoard[goingto_row][goingto_column]
+            else:
+                #print '%d row %d column' %(goingto_row, goingto_column)
+                break
         
         return None if bracket != player or not self.is_valid(goingto_row, goingto_column)  else bracket
         
@@ -98,15 +103,11 @@ class Board(object):
         
         if self.is_legal(player, row, column):
             self.GameBoard[row][column] = player 
+            #print 'am i getting here what the frick'
         #checks that the move was legal and continues taking input if the move 
         #was not legal until legal move occurs
         else:
-            legal = False
-            while not legal:
-                print "That move was illegal, please print a legal move"
-                move = input()
-                legal = self.is_legal(player, move[0],move[1])
-            self.GameBoard[row][column] = player 
+            print "That's _NOT_ okay, you can't treat me that way"
 
         "Legality is checked elsewhere"
         for d in self.DIRECTIONS:

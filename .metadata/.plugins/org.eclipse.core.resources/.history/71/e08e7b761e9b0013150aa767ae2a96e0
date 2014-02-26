@@ -1,0 +1,21 @@
+'''
+Created on Feb 19, 2014
+
+@author: gregbocko
+'''
+
+class OthelloPlayer(object):
+    '''
+    classdocs
+    '''
+
+
+    def __init__(self, depthLimit, timeLimit1 timeLimit2):
+        
+        
+        
+        '''
+        Constructor
+        '''
+        
+    def heuristicFunction(self, Board):
