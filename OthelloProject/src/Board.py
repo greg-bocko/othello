@@ -1,4 +1,5 @@
 import time
+import copy
 '''
 Created on Feb 19, 2014
 
@@ -14,13 +15,18 @@ class Board(object):
     UP_RIGHT, DOWN_RIGHT, DOWN_LEFT, UP_LEFT = [-1, -1],[1, -1], [1,1], [-1, 1]
     DIRECTIONS = (UP, UP_RIGHT, RIGHT, DOWN_RIGHT, DOWN, DOWN_LEFT, LEFT, UP_LEFT)
 
-    def __init__(self):
-        self.GameBoard = [['.' for j in xrange(8)] for i in xrange(8)] 
-        
-        self.GameBoard[3][3] = 'B'
-        self.GameBoard[4][4] = 'B'
-        self.GameBoard[4][3] = 'W'
-        self.GameBoard[3][4] = 'W'
+    #if arraypresent is true, a real array should be passed in with the whole gameboard
+    def __init__(self,arraypresent = False, array = []):
+        if(arraypresent):
+            self.GameBoard = copy.deepcopy(array)
+            #this creates a copy of a gameboard array which is passed in
+        else:
+            self.GameBoard = [['.' for j in xrange(8)] for i in xrange(8)] 
+            
+            self.GameBoard[3][3] = 'B'
+            self.GameBoard[4][4] = 'B'
+            self.GameBoard[4][3] = 'W'
+            self.GameBoard[3][4] = 'W'
         
     def print_board(self):
         for i in range(len(self.GameBoard)):
@@ -92,6 +98,16 @@ class Board(object):
         
         if self.is_legal(player, row, column):
             self.GameBoard[row][column] = player 
+        #checks that the move was legal and continues taking input if the move 
+        #was not legal until legal move occurs
+        else:
+            legal = False
+            while not legal:
+                print "That move was illegal, please print a legal move"
+                move = input()
+                legal = self.is_legal(player, move[0],move[1])
+            self.GameBoard[row][column] = player 
+
         "Legality is checked elsewhere"
         for d in self.DIRECTIONS:
             self.make_flips(row, column, player, d)
@@ -118,6 +134,9 @@ class Board(object):
             if self.find_bracket(player, row, column, direction) != None:
                 hasbracket = True
             
+        #if not hasbracket:
+        #    print 'this move is illegal'
+
         return self.GameBoard[row][column] == '.' and hasbracket
         
             
@@ -153,5 +172,13 @@ class Board(object):
             return False
         else:
             return True
+
+    def get_2d_array(self):
+        "really weird method but needs to be used when building tree"
+        return self.GameBoard
+
+    def set_2d_array(self, gb):
+        "really weird method but needs to be used when building tree"
+        self.GameBoard = gb
 
         
