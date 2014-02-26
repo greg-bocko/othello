@@ -154,7 +154,8 @@ class Board(object):
         return legal_moves
     
     def any_legal_moves(self, player):
-        if self.legal_moves(player) is not None:
+        legals =self.legal_moves(player)
+        if self.legal_moves(player):
             return True
         else:
             return False
