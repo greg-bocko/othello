@@ -39,7 +39,6 @@ class OthelloPlayer(object):
     		return [7,7]
     	headNode = TreeNode(board, self.player_color, a)
     	a = self.Alpha_Beta(headNode, 0, -1000, 1000)
-        print a[1], a[2]
     	#print a
     	return a[2]
 
@@ -68,7 +67,7 @@ class OthelloPlayer(object):
     	#handles early pruning
     	counter = 0
     	children = node.return_All_Children()
-    	best = [0, 0, 0 ,0, 0]
+    	best = [0, 0, 0 ,0]
     	if(self.player_color == 'B'):
     		for i in range(len(children)):
     			value = self.opponent().Alpha_Beta(children[i], depth+1, alpha, beta)
@@ -103,7 +102,7 @@ class OthelloPlayer(object):
 	    		
     			if (beta <= alpha):
     				break
-    		print 'hey whats up', depth, best
+    			
     		return beta, best, children[best[depth]].get_move()
     #creates the children of a node. Takes in moves and modifies a board for each child and creates
     #a new node for each child

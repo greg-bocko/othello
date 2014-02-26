@@ -27,15 +27,15 @@ def main():
     while not board.gameover(this_turn):
         if this_turn == playing_dude.player_color:
             board = playing_dude.make_move(board)
-            #board.print_board()
-            print '%s dude just went\n' %(this_turn)
-            this_turn = trade_turn(this_turn)
-            print '%s dude is going to go\n'%(this_turn)
-            sys.stdout.flush()
             board.print_board()
+            #print '%s dude just went\n' %(this_turn)
+            this_turn = trade_turn(this_turn)
+            #print '%s dude is going to go\n'%(this_turn)
+            sys.stdout.flush()
+            #board.print_board()
         else:
             board = playing_dude2.make_move(board)
-            board.print_board()
+            #board.print_board()
             print '%s dude just went\n' %(this_turn)
             this_turn = trade_turn(this_turn)
             print '%s dude is going to go\n'%(this_turn)

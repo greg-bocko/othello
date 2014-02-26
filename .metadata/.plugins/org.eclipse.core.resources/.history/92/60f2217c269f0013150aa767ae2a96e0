@@ -28,26 +28,26 @@ def main():
         if this_turn == playing_dude.player_color:
             board = playing_dude.make_move(board)
             #board.print_board()
-            print '%s dude just went\n' %(this_turn)
+            #print '%s dude just went\n' %(this_turn)
             this_turn = trade_turn(this_turn)
-            print '%s dude is going to go\n'%(this_turn)
+            #print '%s dude is going to go\n'%(this_turn)
             sys.stdout.flush()
-            board.print_board()
-        else:
-            board = playing_dude2.make_move(board)
-            board.print_board()
-            print '%s dude just went\n' %(this_turn)
-            this_turn = trade_turn(this_turn)
-            print '%s dude is going to go\n'%(this_turn)
-            sys.stdout.flush()
-            board.print_board()
-        '''
+            #board.print_board()
         else:
             #print board.legal_moves(this_turn)
             move = raw_input()
             board = board.make_move(this_turn, int(float(move[0])), int(float(move[2])))
             #print '%s dude just went\n' %(this_turn)
             this_turn = trade_turn(this_turn)
+        '''
+        else:
+            board = playing_dude2.make_move(board)
+            #board.print_board()
+            print '%s dude just went\n' %(this_turn)
+            this_turn = trade_turn(this_turn)
+            print '%s dude is going to go\n'%(this_turn)
+            sys.stdout.flush()
+            board.print_board()
         '''
         
 def trade_turn(this_turn):
