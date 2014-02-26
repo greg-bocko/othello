@@ -82,9 +82,10 @@ class OthelloPlayer(object):
 	    				alpha = value[0]
 	    				best = value[1]
 	    				best[depth] = i
+                print 'hey whats up @ 88', depth, best, len(children), alpha, beta
 	    		if (beta <= alpha):
     				break
-            print 'hey whats up', depth,
+    
     		return alpha, best, children[best[depth]].get_move()
     	else:
     		for i in range(len(children)):

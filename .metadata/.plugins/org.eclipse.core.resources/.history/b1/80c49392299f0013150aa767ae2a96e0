@@ -84,7 +84,7 @@ class OthelloPlayer(object):
 	    				best[depth] = i
 	    		if (beta <= alpha):
     				break
-            print 'hey whats up', depth,
+
     		return alpha, best, children[best[depth]].get_move()
     	else:
     		for i in range(len(children)):
@@ -103,7 +103,7 @@ class OthelloPlayer(object):
 	    		
     			if (beta <= alpha):
     				break
-    		print 'hey whats up', depth, best, len(children), alpha, beta
+    		print 'hey whats up', depth, best, len(children)
     		return beta, best, children[best[depth]].get_move()
     #creates the children of a node. Takes in moves and modifies a board for each child and creates
     #a new node for each child
