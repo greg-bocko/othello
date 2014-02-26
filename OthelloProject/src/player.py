@@ -25,6 +25,9 @@ def main():
     #if playing_dude.player_color == 'B':
     
     while not board.gameover(this_turn):
+        if(board.gameover('B')):
+            break
+        
         if this_turn == playing_dude.player_color:
             board = playing_dude.make_move(board)
             #board.print_board()
