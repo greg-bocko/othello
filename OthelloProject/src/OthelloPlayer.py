@@ -69,6 +69,8 @@ class OthelloPlayer(object):
     	counter = 0
     	children = node.return_All_Children()
     	best = [0, 0, 0 ,0, 0]
+    	if(len(children) == 0):
+    		return 0, best, [0,0]
     	if(self.player_color == 'B'):
     		for i in range(len(children)):
     			value = self.opponent().Alpha_Beta(children[i], depth+1, alpha, beta)
@@ -90,7 +92,7 @@ class OthelloPlayer(object):
     			return_child = [0,0]
     		else:
     			return_child = children[best[depth]].get_move()
-    		print 'yo', depth, best, len(children), alpha, beta
+    		#print 'yo', depth, best, len(children), alpha, beta
     		return alpha, best, return_child
     	else:
     		for i in range(len(children)):
@@ -114,7 +116,7 @@ class OthelloPlayer(object):
     			return_child = [0,0]
     		else:
     			return_child = children[best[depth]].get_move()
-    		print 'hey whats up', depth, best, len(children), alpha, beta
+    		#print 'hey whats up', depth, best, len(children), alpha, beta
     		return beta, best, return_child
     #creates the children of a node. Takes in moves and modifies a board for each child and creates
     #a new node for each child
