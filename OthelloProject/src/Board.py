@@ -108,6 +108,7 @@ class Board(object):
         #was not legal until legal move occurs
         else:
             print "That's _NOT_ okay, you can't treat me that way"
+            sys.exit
 
         "Legality is checked elsewhere"
         for d in self.DIRECTIONS:
@@ -154,7 +155,7 @@ class Board(object):
         return legal_moves
     
     def any_legal_moves(self, player):
-        legals =self.legal_moves(player)
+        #legals =self.legal_moves(player)
         if self.legal_moves(player):
             return True
         else:
